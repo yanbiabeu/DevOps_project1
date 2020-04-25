@@ -1,8 +1,5 @@
 pipeline {
-      agent { label 'labelName' }
-( 'docker' )
-
-          }
+      agent any
        tools {
         maven 'M2_HOME'
           }
