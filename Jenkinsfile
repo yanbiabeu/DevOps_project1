@@ -1,7 +1,7 @@
 pipeline {
        agent {
       agent { label 'labelName' }
-(Docker-host)
+(docker)
 
           }
        tools {
