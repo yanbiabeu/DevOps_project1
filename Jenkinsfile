@@ -6,7 +6,7 @@ pipeline {
         maven 'M2_HOME'
           }
             stages {
-             stage ( "pull repositry') {
+             stage ( 'pull repositry') {
                 steps {
                 echo "pull code from Github"
                 git 'https://github.com/yanbiabeu/holliday.git'
