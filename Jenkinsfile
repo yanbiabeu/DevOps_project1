@@ -1,6 +1,8 @@
 pipeline {
        agent {
-       label 'Docker-host'
+      agent { label 'labelName' }
+(Docker-host)
+
           }
        tools {
         maven 'M2_HOME'
