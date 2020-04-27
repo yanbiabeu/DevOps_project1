@@ -31,7 +31,7 @@ pipeline {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker rmi hollidays:v.${BUILD_NUMBER}; docker build -t hollidays:v.${BUILD_NUMBER} .; docker tag hollidays:v.${BUILD_NUMBER} eab046/hollidays:v.${BUILD_NUMBER}; docker push eab046/hollidays:v.${BUILD_NUMBER}', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 }
               }
-              stage (continuous deployment) {
+              stage ('continuous deployment') {
                 steps{
                 echo "Deploying to Docker"
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -itd --name Devopsdreams -p 8080:8081 eab046/hollidays:v.${BUILD_NUMBER}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
