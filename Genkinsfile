@@ -28,7 +28,7 @@ pipeline {
               stage ('deploy'){
                 steps {
                 echo "deploy war file"
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker build -t hollidays:v.1 .; docker tag hollidays:v.1 epalleewane/hollidays:v.1; docker push epalleewanee/hollidays:v.1', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker build -t hollidays:v.1 .; docker tag hollidays:v.1 epalleewane/hollidays:v.1; docker push epalleewanee/hollidays:v.1 , flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 }
               }
               stage ('continuous deployment') {
