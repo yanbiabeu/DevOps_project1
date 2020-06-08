@@ -1,8 +1,14 @@
+
 pipeline {
-      agent any
-       tools {
+    agent any
+    triggers {
+        cron(' H/15 * * * * ')
+     }
+    tools {
         maven 'M2_HOME'
-          }
+      
+    }
+
             stages {
              stage ( 'pull repositry') {
                 steps {
