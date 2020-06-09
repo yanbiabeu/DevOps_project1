@@ -35,13 +35,13 @@ pipeline {
               stage ('deploy'){
                 steps {
                 echo "deploy war file"
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker build -t hollidays:v.${BUILD_NUMBER} .; docker tag hollidays:v.${BUILD_NUMBER} eab046/hollidays:v.${BUILD_NUMBER}; docker push eab046/hollidays:v.${BUILD_NUMBER}', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker rmi hollidays:1.0; docker build -t hollidays:1.0 .;docker tag hollidays:1.0 epalleewane/hollidays:1.0; docker push epalleewane/hollidays:1.0', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/webapp/target', sourceFiles: '**/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 }
               }
               stage ('continuous deployment') {
                 steps{
                 echo "Deploying to Docker"
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -itd --name Devopsttt -p 8080:8080 eab046/hollidays:v.${BUILD_NUMBER-1}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker-host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -itd --name Devopsttt -p 8080:8080 epalleewane/hollidays:v.${BUILD_NUMBER-1}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 }
              }   
               
